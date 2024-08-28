@@ -3,34 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spelling Practice App</title>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Spelling Practice App</title>
-        <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file -->
-    </head>
-    
+    <title>Spelling Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #spelling-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #check-spelling {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #feedback {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Spelling Practice App</h1>
-    <p>Click the button to start practicing your spelling!</p>
-
-    <!-- Button to trigger word pronunciation -->
-    <button id="start-practice">Start Practice</button>
-
-    <!-- Placeholder for word display -->
-    <p id="word-display"></p>
-
-    <!-- Input for user to enter the spelling -->
-    <input type="text" id="spelling-input" placeholder="Type the spelling here">
+    <h1>Spelling Practice</h1>
+    <p>Listen to the word and type your spelling below:</p>
+    <input type="text" id="spelling-input" placeholder="Enter your spelling here">
     <button id="check-spelling">Check Spelling</button>
     <p id="feedback"></p>
 
-    <!-- Placeholder for feedback -->
-    <p id="feedback"></p>
-
-    <!-- Link to JavaScript file -->
+    <!-- Link to the external JavaScript file -->
     <script src="app.js"></script>
 </body>
 </html>
