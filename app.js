@@ -214,7 +214,7 @@ function startPractice() {
     //document.getElementById('word-display').textContent = selectedWord;
 }
 // Event listener to trigger the practice session when the button is clicked
-document.getElementById('start-practice').addEventListener('click', startPractice)
+document.getElementById('start-practice').addEventListener('click', start-practice)
 
 let currentWord = "";  // Variable to store the current word being tested
 
