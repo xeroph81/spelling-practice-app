@@ -1,0 +1,58 @@
+/* Basic reset for padding and margin */
+body, h1, p, input, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+#word-display {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#spelling-input {
+    padding: 10px;
+    font-size: 1.2em;
+    width: 300px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#check-spelling, #start-practice {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+#check-spelling:hover, #start-practice:hover {
+    background-color: #0056b3;
+}
+
+#feedback {
+    font-size: 1.2em;
+    font-weight: bold;
+}
