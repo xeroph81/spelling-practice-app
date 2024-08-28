@@ -199,6 +199,12 @@ const wordList = [
 // Test the word list by logging it to the console
 console.log("Word List:", wordList);
 
+// Function to pronounce a word using the Web Speech API
+function pronounceWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    speechSynthesis.speak(utterance);
+}
+
 // Function to pick a random word from the list and pronounce it
 function startPractice() {
     const randomIndex = Math.floor(Math.random() * wordList.length);
