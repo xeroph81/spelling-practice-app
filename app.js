@@ -164,7 +164,7 @@ function promptNextWord() {
     document.getElementById('feedback').textContent = "";
 }
 
-// Function to check the user's spelling
+// Function to check the user's spelling and immediately prompt the next word
 function checkSpelling() {
     const userSpelling = document.getElementById('spelling-input').value.trim();
 
@@ -176,8 +176,8 @@ function checkSpelling() {
         document.getElementById('feedback').style.color = "red";
     }
 
-    // Automatically prompt the next word after a delay
-    setTimeout(promptNextWord, 2000);  // Adjust the delay as needed
+    // Prompt the next word immediately
+    promptNextWord();
 }
 
 // Event listener for the "Enter" key in the input field
