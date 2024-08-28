@@ -1,3 +1,59 @@
+// Firebase configuration and initialization
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+  
+  // Manage UI based on user authentication state
+  auth.onAuthStateChanged(user => {
+      if (user) {
+          // User is logged in
+          document.getElementById('auth-container').style.display = 'none';
+          // Show the spelling test features (e.g., display the main content)
+          document.getElementById('main-content').style.display = 'block';
+      } else {
+          // No user is logged in
+          document.getElementById('auth-container').style.display = 'block';
+          // Hide the spelling test features (e.g., hide the main content)
+          document.getElementById('main-content').style.display = 'none';
+      }
+  });
+  
+  // Sign Up Functionality
+  document.getElementById('sign-up').addEventListener('click', () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.createUserWithEmailAndPassword(email, password)
+          .then(userCredential => {
+              console.log("User signed up:", userCredential.user);
+          })
+          .catch(error => {
+              console.error("Error signing up:", error);
+          });
+  });
+  
+  // Login Functionality
+  document.getElementById('login').addEventListener('click', () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.signInWithEmailAndPassword(email, password)
+          .then(userCredential => {
+              console.log("User logged in:", userCredential.user);
+          })
+          .catch(error => {
+              console.error("Error logging in:", error);
+          });
+  });  
+
 // Static word list
 const wordList = [
     "abbreviate", "Aberdeen", "able-bodied", "aborigine", "absenteeism", "abundant", 
