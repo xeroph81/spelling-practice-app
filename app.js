@@ -168,11 +168,6 @@ function promptNextWord() {
 function checkSpelling() {
     const userSpelling = document.getElementById('spelling-input').value.trim();
 
-    if (!currentWord) {
-        // If no word has been selected, do nothing
-        return;
-    }
-
     if (userSpelling.toLowerCase() === currentWord.toLowerCase()) {
         document.getElementById('feedback').textContent = "Correct!";
         document.getElementById('feedback').style.color = "green";
@@ -192,5 +187,6 @@ document.getElementById('spelling-input').addEventListener('keypress', function 
     }
 });
 
-// Start practice automatically when the page loads
-window.onload = startPractice;
+// Optionally, start practice automatically when the page loads
+// Uncomment the following line if you want to start practice automatically on page load
+// window.onload = startPractice;
