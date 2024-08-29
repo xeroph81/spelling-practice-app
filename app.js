@@ -138,8 +138,9 @@ const wordList = [
     "yolk", "Zaire", "zephyr", "zircon", "zoology", "zwieback"
 ];
 
-// Variable to store the current word being tested
+// Variables to track the current word and score
 let currentWord = "";
+let attempts = [];  // Array to store each attempt
 
 // Function to pronounce a word using the Web Speech API
 function pronounceWord(word) {
@@ -149,6 +150,8 @@ function pronounceWord(word) {
 
 // Function to start the practice session and prompt the first word
 function startPractice() {
+    attempts = []; // Reset attempts at the start of practice
+    updateScoreDisplay(); // Reset score display
     promptNextWord();  // Start by prompting the first word
 }
 
@@ -174,27 +177,71 @@ function repeatWord() {
     }
 }
 
-// Function to check the user's spelling and then move to the next word after a delay
+// Function to check the user's spelling
 function checkSpelling() {
     const userSpelling = document.getElementById('spelling-input').value.trim();
+    let status = '';
 
     if (userSpelling.toLowerCase() === currentWord.toLowerCase()) {
         document.getElementById('feedback').textContent = "Correct!";
         document.getElementById('feedback').style.color = "green";
+        status = 'correct';
     } else {
         document.getElementById('feedback').textContent = `Incorrect. The correct spelling is "${currentWord}".`;
         document.getElementById('feedback').style.color = "red";
+        status = 'incorrect';
     }
 
+    // Add the attempt to the attempts array
+    attempts.push({ word: currentWord, status: status });
+
+    // Update the score display
+    updateScoreDisplay();
+
     // Delay before moving to the next word to allow the user to see the feedback
-    setTimeout(promptNextWord, 3000); // 3000ms delay (2 seconds)
+    setTimeout(promptNextWord, 2000); // 2000ms delay (2 seconds)
+}
+
+// Function to skip the current word
+function skipWord() {
+    if (currentWord) {
+        // Add the attempt to the attempts array with status 'skipped'
+        attempts.push({ word: currentWord, status: 'skipped' });
+
+        // Update the score display
+        updateScoreDisplay();
+
+        // Prompt the next word immediately
+        promptNextWord();
+    }
+}
+
+// Function to update the score display
+function updateScoreDisplay() {
+    let correctCount = attempts.filter(attempt => attempt.status === 'correct').length;
+    let totalCount = attempts.length;
+    let skippedCount = attempts.filter(attempt => attempt.status === 'skipped').length;
+    let percentage = totalCount > 0 ? (correctCount / totalCount) * 100 : 0;
+
+    // Update the display of the score
+    document.getElementById('score').textContent = 
+        `Correct: ${correctCount} / Total: ${totalCount} (Skipped: ${skippedCount}) - ${percentage.toFixed(2)}%`;
+    
+    // Update the attempts table or list
+    let attemptList = document.getElementById('attempt-list');
+    attemptList.innerHTML = '';
+    attempts.forEach(attempt => {
+        let li = document.createElement('li');
+        li.textContent = `${attempt.word}: ${attempt.status}`;
+        attemptList.appendChild(li);
+    });
 }
 
 // Event listener for the "Start Practice" button
 document.getElementById('start-practice').addEventListener('click', startPractice);
 
-// Event listener for the "Check Spelling" button
-document.getElementById('check-spelling').addEventListener('click', checkSpelling);
+// Event listener for the "Skip Word" button
+document.getElementById('skip-word').addEventListener('click', skipWord);
 
 // Event listener for the "Repeat Word" button
 document.getElementById('repeat-word').addEventListener('click', repeatWord);
