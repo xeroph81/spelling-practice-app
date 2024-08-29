@@ -138,21 +138,36 @@ const wordList = [
     "yolk", "Zaire", "zephyr", "zircon", "zoology", "zwieback"
 ];
 
+// Test the word list by logging it to the console
+console.log("Word List:", wordList);
+
 // Function to pronounce a word using the Web Speech API
 function pronounceWord(word) {
     const utterance = new SpeechSynthesisUtterance(word);
     speechSynthesis.speak(utterance);
 }
 
+// Function to pick a random word from the list and pronounce it
+function startPractice() {
+    const randomIndex = Math.floor(Math.random() * wordList.length);
+    const selectedWord = wordList[randomIndex];
+    
+    // Display the word in the console (for testing purposes)
+    console.log("Selected Word:", selectedWord);
+
+    // Pronounce the selected word
+    pronounceWord(selectedWord);
+
+    // Optionally, display the word on the webpage (you can remove this if not needed)
+    //document.getElementById('word-display').textContent = selectedWord;
+}
+// Event listener to trigger the practice session when the button is clicked
+document.getElementById('start-practice').addEventListener('click', startPractice)
+
 let currentWord = "";  // Variable to store the current word being tested
 
-// Function to start the practice session and prompt the first word
+// Function to start the practice session
 function startPractice() {
-    promptNextWord();  // Start by prompting the first word
-}
-
-// Function to prompt the next word
-function promptNextWord() {
     const randomIndex = Math.floor(Math.random() * wordList.length);
     currentWord = wordList[randomIndex];
 
@@ -164,7 +179,7 @@ function promptNextWord() {
     document.getElementById('feedback').textContent = "";
 }
 
-// Function to check the user's spelling
+// Function to check the user's spelling (same as before)
 function checkSpelling() {
     const userSpelling = document.getElementById('spelling-input').value.trim();
 
@@ -175,18 +190,25 @@ function checkSpelling() {
         document.getElementById('feedback').textContent = `Incorrect. The correct spelling is "${currentWord}".`;
         document.getElementById('feedback').style.color = "red";
     }
-
-    // Automatically prompt the next word after a delay
-    setTimeout(promptNextWord, 2000);  // Adjust the delay as needed
 }
+
+// Event listener for the "Check Spelling" button
+document.getElementById('check-spelling').addEventListener('click', checkSpelling);
+
+// Event listener for the "Start Practice" button
+document.getElementById('start-practice').addEventListener('click', startPractice);
 
 // Event listener for the "Enter" key in the input field
 document.getElementById('spelling-input').addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
-        checkSpelling();  // Check spelling when Enter is pressed
+        checkSpelling();
     }
 });
 
-// Optionally, start practice automatically when the page loads
-// Uncomment the following line if you want to start practice automatically on page load
-// window.onload = startPractice;
+
+// Event listener for the "Check Spelling" button
+document.getElementById('check-spelling').addEventListener('click', checkSpelling);
+
+// Event listener for the "Start Practice" button
+document.getElementById('start-practice').addEventListener('click', startPractice);
+
