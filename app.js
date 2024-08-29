@@ -168,9 +168,8 @@ function promptNextWord() {
 function checkSpelling() {
     const userSpelling = document.getElementById('spelling-input').value.trim();
 
-    if (currentWord === "") {
+    if (!currentWord) {
         // If no word has been selected, do nothing
-        document.getElementById('feedback').textContent = "No word to check.";
         return;
     }
 
@@ -193,5 +192,5 @@ document.getElementById('spelling-input').addEventListener('keypress', function 
     }
 });
 
-// Explicitly start the practice when the page loads
-window.addEventListener('load', startPractice);
+// Start practice automatically when the page loads
+window.onload = startPractice;
