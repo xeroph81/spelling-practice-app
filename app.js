@@ -138,8 +138,8 @@ const wordList = [
     "yolk", "Zaire", "zephyr", "zircon", "zoology", "zwieback"
 ];
 
-// Test the word list by logging it to the console
-console.log("Word List:", wordList);
+// Variable to store the current word being tested
+let currentWord = "";
 
 // Function to pronounce a word using the Web Speech API
 function pronounceWord(word) {
@@ -147,27 +147,13 @@ function pronounceWord(word) {
     speechSynthesis.speak(utterance);
 }
 
-// Function to pick a random word from the list and pronounce it
+// Function to start the practice session and prompt the first word
 function startPractice() {
-    const randomIndex = Math.floor(Math.random() * wordList.length);
-    const selectedWord = wordList[randomIndex];
-    
-    // Display the word in the console (for testing purposes)
-    console.log("Selected Word:", selectedWord);
-
-    // Pronounce the selected word
-    pronounceWord(selectedWord);
-
-    // Optionally, display the word on the webpage (you can remove this if not needed)
-    //document.getElementById('word-display').textContent = selectedWord;
+    promptNextWord();  // Start by prompting the first word
 }
-// Event listener to trigger the practice session when the button is clicked
-document.getElementById('start-practice').addEventListener('click', startPractice)
 
-let currentWord = "";  // Variable to store the current word being tested
-
-// Function to start the practice session
-function startPractice() {
+// Function to prompt the next word
+function promptNextWord() {
     const randomIndex = Math.floor(Math.random() * wordList.length);
     currentWord = wordList[randomIndex];
 
@@ -179,7 +165,16 @@ function startPractice() {
     document.getElementById('feedback').textContent = "";
 }
 
-// Function to check the user's spelling (same as before)
+// Function to repeat the current word
+function repeatWord() {
+    if (currentWord) {
+        pronounceWord(currentWord);
+    } else {
+        document.getElementById('feedback').textContent = "No word is currently being tested.";
+    }
+}
+
+// Function to check the user's spelling and then move to the next word after a delay
 function checkSpelling() {
     const userSpelling = document.getElementById('spelling-input').value.trim();
 
@@ -190,25 +185,23 @@ function checkSpelling() {
         document.getElementById('feedback').textContent = `Incorrect. The correct spelling is "${currentWord}".`;
         document.getElementById('feedback').style.color = "red";
     }
+
+    // Delay before moving to the next word to allow the user to see the feedback
+    setTimeout(promptNextWord, 3000); // 3000ms delay (2 seconds)
 }
+
+// Event listener for the "Start Practice" button
+document.getElementById('start-practice').addEventListener('click', startPractice);
 
 // Event listener for the "Check Spelling" button
 document.getElementById('check-spelling').addEventListener('click', checkSpelling);
 
-// Event listener for the "Start Practice" button
-document.getElementById('start-practice').addEventListener('click', startPractice);
+// Event listener for the "Repeat Word" button
+document.getElementById('repeat-word').addEventListener('click', repeatWord);
 
 // Event listener for the "Enter" key in the input field
 document.getElementById('spelling-input').addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
-        checkSpelling();
+        checkSpelling();  // Check spelling when Enter is pressed
     }
 });
-
-
-// Event listener for the "Check Spelling" button
-document.getElementById('check-spelling').addEventListener('click', checkSpelling);
-
-// Event listener for the "Start Practice" button
-document.getElementById('start-practice').addEventListener('click', startPractice);
-
