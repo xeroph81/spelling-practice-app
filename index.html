@@ -4,72 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spelling Practice</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        #spelling-input {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        #repeat-word, #start-practice, #skip-word {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-right: 10px;
-            margin-top: 10px;
-        }
-        #feedback {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        #score {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        #attempt-list {
-            margin-top: 20px;
-            list-style-type: none;
-            padding-left: 0;
-        }
-        #attempt-list li {
-            font-size: 16px;
-        }
-        #instructions {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Spelling Practice</h1>
-    
-    <button id="start-practice">Start Practice (This will reset your score)</button>
-    <button id="repeat-word">Repeat Word</button>
-    <button id="skip-word">Skip Word</button>
+    <header>
+        <h1>Spelling Practice</h1>
+    </header>
 
-    <p id="feedback"></p>
+    <main>
+        <section>
+            <div class="button-group">
+                <button id="start-practice" aria-label="Start Practice">Start Practice (This will reset your score)</button>
+                <button id="repeat-word" aria-label="Repeat Word">Repeat Word</button>
+                <button id="skip-word" aria-label="Skip Word">Skip Word</button>
+            </div>
 
-    <input type="text" id="spelling-input" placeholder="Enter your spelling here">
-    
-    <div id="instructions">
-        <p>Press "Enter" to check your spelling attempt.</p>
-    </div>
+            <p id="feedback" role="alert" aria-live="polite"></p>
 
-    <h2>Score</h2>
-    <p id="score">Correct: 0 / Total: 0 (Skipped: 0) - 0.00%</p>
+            <div class="input-group">
+                <label for="spelling-input" class="sr-only">Enter your spelling here</label>
+                <input type="text" id="spelling-input" placeholder="Enter your spelling here" aria-label="Spelling Input">
+            </div>
 
-    <h2>Attempts</h2>
-    <ul id="attempt-list"></ul>
+            <div id="instructions" class="instructions">
+                <p>Press "Enter" to check your spelling attempt.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Score</h2>
+            <p id="score" aria-live="polite">Correct: 0 / Total: 0 (Skipped: 0) - 0.00%</p>
+        </section>
+
+        <section>
+            <h2>Attempts</h2>
+            <ul id="attempt-list" aria-live="polite"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Spelling Practice App</p>
+    </footer>
 
     <script src="app.js"></script>
 </body>

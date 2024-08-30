@@ -233,6 +233,12 @@ function updateScoreDisplay() {
     attempts.forEach(attempt => {
         let li = document.createElement('li');
         li.textContent = `${attempt.word}: ${attempt.status}`;
+        if (attempt.status === 'correct') {
+            li.classList.add('correct');
+        } else if (attempt.status === 'incorrect') {
+            li.classList.add('incorrect');
+        }
+        // No class needed for 'skipped' as it will remain black
         attemptList.appendChild(li);
     });
 }
